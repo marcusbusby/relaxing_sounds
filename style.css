@@ -1,6 +1,9 @@
 body {
 	font-family: 'Fredoka One';
 }
+.sound_desc{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 .navbar-right{
 	  margin: 20px 0px 0px 0px!important;
 }
@@ -54,6 +57,13 @@ body {
 }
 #login{
 	margin-bottom: 10px;
+}
+#save_playlist{
+	margin-top: 10px;
+}
+#now_playing{
+	text-align: center;
+	font-size: 25px;
 }
 ul{
 	padding: 0;

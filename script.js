@@ -41,7 +41,7 @@
 'Vengeful Nest',
 'Brown Baby']
 
-	$('.audio_container').click(function() {
+	$('.audio_container').click(function() {	//selects the audio file
 		$(this).css('border','6px solid green')
 		tempJson = {};
 		tempJson["id"] = $(this).find('audio').attr('id');
@@ -53,13 +53,13 @@
 		}
 	})
 
-	$('#play').click(function() {
+	$('#play').click(function() {	//plays the selected files
 		for (var i=0;i<uniqueSoundArray.length;i++) {
 			document.getElementById(uniqueSoundArray[i]).play();
 		}
 	})
 
-	$("#play_list").on('click', '.fa-times', function() {
+	$("#play_list").on('click', '.fa-times', function() {	//removes selected audio files
 		var id = $(this).prev().prev().html();
 		$(this).parent().remove();
 		$('#'+id).parent().parent().parent().css('border','6px solid indianred');
@@ -73,14 +73,17 @@
 		}
 	})
 
-	$('#save').click(function() {
+	$('#save').click(function() {	//save to localstorage
 		tempJson = {};
 		tempJson["name"] = $('#playlist_name').val();
 		soundArray.push(tempJson)
 		console.log(soundArray);
+		localStorage.setItem('soundArray',JSON.stringify(soundArray))
+		$("#save_playlist").text($('#playlist_name').val());
+		storageName = $('#playlist_name').val();
 	})
 
-	$('#cancel').click(function() {
+	$('#cancel').click(function() {		//stops playing all files and resets list
 		$('audio').each(function(){
 		    this.pause(); // Stop playing
 		    this.currentTime = 0; // Reset time
@@ -90,9 +93,10 @@
 		$('#playlist_name').val('');
 		$('.audio_container').css('border','6px solid indianred');
 		$('#sound_playlist li').remove();
+		$("#now_playing").text("");
 	})
 
-	$('#random').click(function() {
+	$('#random').click(function() {		//randomizes audio files
 		$('#cancel').click();
 		var randNum = Math.round((Math.random()*8));
 		var randNumC = Math.round((Math.random()*40));
@@ -102,3 +106,29 @@
 			$('#sound_container').children()[randNumB].click()
 		}
 	})
+
+
+	var storageArray;
+	var storageName;
+	loadLocalStorage = function() {		//loads localstorage data
+		//localStorage.clear();
+		storageArray = JSON.parse(localStorage.soundArray);
+		storageName = storageArray[storageArray.length-1].name;
+		$("#saved_plalists").append('<button id="save_playlist" class="btn btn-default">'+storageName+'</button>')
+	}
+
+	loadLocalStorage();
+
+	$("#play_list").on('click', '#save_playlist', function() {		//loads saved playlist
+		for (var i=0;i<storageArray.length;i++) {
+			if (i != storageArray.length - 1) {
+				var id = storageArray[i].id;
+				document.getElementById(id).play();
+				$('#'+id).parent().parent().parent().css('border','6px solid green');
+			}
+		}
+		$("#now_playing").text("Now playing "+storageName)
+	})
+
+
+
