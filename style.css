@@ -1,0 +1,62 @@
+body {
+	font-family: 'Fredoka One';
+}
+.navbar-right{
+	  margin: 20px 0px 0px 0px!important;
+}
+#header{
+	text-align: center;
+}
+.sound_img{
+	width: 300px;
+	height: 150px;
+}
+.audio_container{
+	float: left;
+	margin: 10px;
+	margin: 10px;
+	border: 6px solid indianred;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.audio_container:hover{
+	border: 6px solid green;
+}
+#sound_container{
+	width: 70%;
+	float: left;
+	margin-left: 15%;
+}
+#play_list{
+	width: 14%;
+	float: left;
+	text-align: center;
+}
+.fa-times{
+	margin-left: 5px;
+	cursor: pointer;
+}
+#buttons{
+	margin-top: 20px;
+}
+#playlist_name{
+	margin-bottom: 10px;
+}
+#random{
+	margin-top: 20px;
+}
+.modal-content{
+	text-align: center;
+}
+.modal-content input{
+	width: 90%;
+  	margin: 10px 0px 10px 0px;
+}
+#login{
+	margin-bottom: 10px;
+}
+ul{
+	padding: 0;
+	list-style: none;
+	text-align: center;
+}

@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-<link href='http://fonts.googleapis.com/css?family=Fredoka+One' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">	
-<link rel="stylesheet" type="text/css" href="style.css">	
-
-
-
-</head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-		<div class="navbar-header">
-		<h2>Relaxing Sounds</h2>
-		</div>
-		<button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#login_modal">Sign in</button>
-		</div>
-	</nav>
-	<div id="sound_container">
+<div id="sound_container">
 		<div class="audio_container">
 			<ul>
 				<li><img class="sound_img" src="bird.jpg"/></li>
@@ -102,40 +81,3 @@
 			</ul>
 		</div>
 	</div>
-	<div id="play_list">
-		<h4>Playlist</h4>
-		<h6>Adjust the volume and click on the images to add sounds</h6>
-		<input id="playlist_name" placeholder="Name your playlist"/>
-		<ul id="sound_playlist">
-
-		</ul>
-		<div id="buttons">
-			<button class="btn btn-default" id="play">Play</button>
-			<button class="btn btn-default" id="save">Save</button>
-			<button class="btn btn-default" id="cancel">Cancel</button>
-		</div>
-		<button class="btn btn-default" id="random">Randomize</button>
-	</div>
-	<form class="modal fade" id="login_modal" class="uploadForm" method="post">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Log In</h4>
-        </div>
-        <div class="input_container">
-          <input id="log_email" class="sample_inputs" placeholder="email" type="text" name="userEmail" />  
-          <input type="password" id="log_pass" class="sample_inputs" placeholder="password" type="text" name="userPassword" />
-          <button class="btn btn-default" id="login" type="submit" value="Log In" name="submit">Log In</button>
-          <label class="log_error"></label>
-        </div>   
-      </div>
-    </div>
-  </form>
-</body>
-
-<script src="jquery-1.11.2.min.js"></script>
-<script src="bootstrap.min.js"></script>
-<script src="script.js"></script>
-
-</html>

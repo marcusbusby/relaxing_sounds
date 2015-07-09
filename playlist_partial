@@ -1,0 +1,14 @@
+<div id="play_list">
+	<h4>Playlist</h4>
+	<h6>Adjust the volume and click on the images to add sounds</h6>
+	<input id="playlist_name" placeholder="Name your playlist"/>
+	<ul id="sound_playlist">
+
+	</ul>
+	<div id="buttons">
+		<button class="btn btn-default" id="play">Play</button>
+		<button class="btn btn-default" id="save">Save</button>
+		<button class="btn btn-default" id="cancel">Cancel</button>
+	</div>
+	<button class="btn btn-default" id="random">Randomize</button>
+</div>
