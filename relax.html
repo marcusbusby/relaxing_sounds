@@ -39,6 +39,9 @@
 #buttons{
 	margin-top: 20px;
 }
+#playlist_name{
+	margin-bottom: 10px;
+}
 ul{
 	padding: 0;
 	list-style: none;
@@ -137,12 +140,14 @@ ul{
 	<div id="play_list">
 		<h4>Playlist</h4>
 		<h6>Adjust the volume and click on the images to add sounds</h6>
+		<input id="playlist_name" placeholder="Name your playlist"/>
 		<ul id="sound_playlist">
 
 		</ul>
 		<div id="buttons">
 			<button class="btn btn-default" id="play">Play</button>
 			<button class="btn btn-default" id="save">Save</button>
+			<button class="btn btn-default" id="cancel">Cancel</button>
 		</div>
 	</div>
 </body>
@@ -157,7 +162,7 @@ ul{
 		if (uniqueSoundArray.indexOf(tempJson["id"]) == -1) {
 			uniqueSoundArray.push(tempJson["id"]);
 			soundArray.push(tempJson);
-			$('#sound_playlist').append('<li><b>'+tempJson.id+'</b><i class="fa fa-times"></i></li>')
+			$('#sound_playlist').append('<li><b>'+tempJson.id+'</b> | <b>'+Math.round(tempJson.vol*10000)/100+'%</b><i class="fa fa-times"></i></li>')
 		}
 	})
 
@@ -168,16 +173,30 @@ ul{
 	})
 
 	$("#play_list").on('click', '.fa-times', function() {
-		var id = $(this).prev().html();
+		var id = $(this).prev().prev().html();
 		$(this).parent().remove();
 		$('#'+id).parent().parent().parent().css('border','6px solid indianred');
 		for (var i=0;i<uniqueSoundArray.length;i++) {
 			if (uniqueSoundArray[i] == id) {
 				uniqueSoundArray.splice(i,1)
 				soundArray.splice(i,1);
-				console.log(soundArray);
 			}
 		}
+	})
+
+	$('#save').click(function() {
+		tempJson = {};
+		tempJson["name"] = $('#playlist_name').val();
+		soundArray.push(tempJson)
+		console.log(soundArray);
+	})
+
+	$('#cancel').click(function() {
+		soundArray = [];
+		uniqueSoundArray = [];
+		$('#playlist_name').val('');
+		$('.audio_container').css('border','6px solid indianred');
+		$('#sound_playlist li').remove();
 	})
 </script>
 </html>
