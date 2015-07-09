@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">		
+<style>
+#header{
+	text-align: center;
+}
+.sound_img{
+	width: 300px;
+	height: 150px;
+}
+.audio_container{
+	float: left;
+	margin: 10px;
+	margin: 10px;
+	border: 6px solid indianred;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.audio_container:hover{
+	border: 6px solid green;
+}
+#sound_container{
+	width: 70%;
+	float: left;
+	margin-left: 15%;
+}
+#play_list{
+	width: 14%;
+	float: left;
+	text-align: center;
+}
+.fa-times{
+	margin-left: 5px;
+	cursor: pointer;
+}
+#buttons{
+	margin-top: 20px;
+}
+ul{
+	padding: 0;
+	list-style: none;
+	text-align: center;
+}
+</style>
+<script src="jquery-1.11.2.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+</head>
+<body>
+	<h1 id="header">Relaxing Sounds</h1>
+	<div id="sound_container">
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="bird.jpg"/></li>
+				<li><label class="sound_desc">Lay back and relax with some bird sounds</label></li>
+				<li><audio id="birds" loop class="sound_file" controls>
+				  <source src="birds.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="church.jpg"/></li>
+				<li><label class="sound_desc">Play some soothing church bells</label></li>
+				<li><audio id="churchbells" loop class="sound_file" controls>
+				  <source src="churchbells.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="cricket.jpg"/></li>
+				<li><label class="sound_desc">Enjoy some musical crickets</label></li>
+				<li><audio id="cricket" loop class="sound_file" controls>
+				  <source src="cricket.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="fire.jpeg"/></li>
+				<li><label class="sound_desc">Gather round the fire</label></li>
+				<li><audio id="fire" loop class="sound_file" controls>
+				  <source src="fire.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="forest.jpg"/></li>
+				<li><label class="sound_desc">Take a stroll through the forest</label></li>
+				<li><audio id="forest" loop class="sound_file" controls>
+				  <source src="forest.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="rain.jpg"/></li>
+				<li><label class="sound_desc">Let the rain drop on your head</label></li>
+				<li><audio id="rain" loop class="sound_file" controls>
+				  <source src="rain.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="typing.jpg"/></li>
+				<li><label class="sound_desc">Type type type</label></li>
+				<li><audio id="typing" loop class="sound_file" controls>
+				  <source src="typing.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="wave.jpg"/></li>
+				<li><label class="sound_desc">Go for a swim in the waves</label></li>
+				<li><audio id="waves" loop class="sound_file" controls>
+				  <source src="waves.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+		<div class="audio_container">
+			<ul>
+				<li><img class="sound_img" src="windchime.jpg"/></li>
+				<li><label class="sound_desc">Let the winchimes relax you</label></li>
+				<li><audio id="windchimes" loop class="sound_file" controls>
+				  <source src="windchimes.mp3" type="audio/mp3">
+				</audio></li>
+			</ul>
+		</div>
+	</div>
+	<div id="play_list">
+		<h4>Playlist</h4>
+		<h6>Adjust the volume and click on the images to add sounds</h6>
+		<ul id="sound_playlist">
+
+		</ul>
+		<div id="buttons">
+			<button class="btn btn-default" id="play">Play</button>
+			<button class="btn btn-default" id="save">Save</button>
+		</div>
+	</div>
+</body>
+<script>	
+	var soundArray = [];
+	var uniqueSoundArray = [];
+	$('.audio_container').click(function() {
+		$(this).css('border','6px solid green')
+		tempJson = {};
+		tempJson["id"] = $(this).find('audio').attr('id');
+		tempJson["vol"] = $(this).find('audio')[0].volume;
+		if (uniqueSoundArray.indexOf(tempJson["id"]) == -1) {
+			uniqueSoundArray.push(tempJson["id"]);
+			soundArray.push(tempJson);
+			$('#sound_playlist').append('<li><b>'+tempJson.id+'</b><i class="fa fa-times"></i></li>')
+		}
+	})
+
+	$('#play').click(function() {
+		for (var i=0;i<uniqueSoundArray.length;i++) {
+			document.getElementById(uniqueSoundArray[i]).play();
+		}
+	})
+
+	$("#play_list").on('click', '.fa-times', function() {
+		var id = $(this).prev().html();
+		$(this).parent().remove();
+		$('#'+id).parent().parent().parent().css('border','6px solid indianred');
+		for (var i=0;i<uniqueSoundArray.length;i++) {
+			if (uniqueSoundArray[i] == id) {
+				uniqueSoundArray.splice(i,1)
+				soundArray.splice(i,1);
+				console.log(soundArray);
+			}
+		}
+	})
+</script>
+</html>
